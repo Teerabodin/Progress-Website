@@ -71,7 +71,7 @@
 
       .logo {
         font-family: var(--mono);
-        font-size: 0.95rem;
+        font-size: 1.02rem;
         color: var(--accent);
         letter-spacing: 0.05em;
       }
@@ -84,7 +84,7 @@
 
       .nav-links a {
         font-family: var(--mono);
-        font-size: 0.82rem;
+        font-size: 0.92rem;
         color: var(--muted);
         text-decoration: none;
         letter-spacing: 0.1em;
@@ -112,10 +112,10 @@
       }
 
       .hero h1 {
-        font-size: clamp(3.4rem, 7vw, 6.8rem);
+        font-size: clamp(2.8rem, 5.6vw, 5rem);
         font-weight: 800;
-        line-height: 0.98;
-        letter-spacing: -0.04em;
+        line-height: 1;
+        letter-spacing: -0.035em;
         margin-bottom: 1.75rem;
         max-width: 900px;
       }
@@ -128,7 +128,7 @@
 
       .hero p {
         font-family: var(--mono);
-        font-size: 1rem;
+        font-size: 1.08rem;
         color: var(--muted);
         line-height: 1.9;
         max-width: 760px;
@@ -170,7 +170,7 @@
 
       .section-label {
         font-family: var(--mono);
-        font-size: 0.82rem;
+        font-size: 0.95rem;
         color: var(--accent);
         letter-spacing: 0.2em;
         text-transform: uppercase;
@@ -198,7 +198,7 @@
 
       .project-card .tag {
         font-family: var(--mono);
-        font-size: 0.72rem;
+        font-size: 0.82rem;
         color: var(--accent2);
         letter-spacing: 0.15em;
         text-transform: uppercase;
@@ -206,7 +206,7 @@
       }
 
       .project-card h3 {
-        font-size: 1.2rem;
+        font-size: 1.35rem;
         font-weight: 700;
         margin-bottom: 0.75rem;
         line-height: 1.3;
@@ -214,7 +214,7 @@
 
       .project-card p {
         font-family: var(--mono);
-        font-size: 0.82rem;
+        font-size: 0.96rem;
         color: var(--muted);
         line-height: 1.85;
       }
@@ -233,14 +233,14 @@
 
       .skill-item .skill-name {
         font-family: var(--mono);
-        font-size: 0.9rem;
+        font-size: 1rem;
         color: var(--text);
         margin-bottom: 0.45rem;
       }
 
       .skill-item .skill-sub {
         font-family: var(--mono);
-        font-size: 0.72rem;
+        font-size: 0.84rem;
         color: var(--muted);
         line-height: 1.7;
       }
@@ -264,13 +264,13 @@
 
       .timeline-date {
         font-family: var(--mono);
-        font-size: 0.8rem;
+        font-size: 0.9rem;
         color: var(--muted);
         padding-top: 0.15rem;
       }
 
       .timeline-content h4 {
-        font-size: 1.02rem;
+        font-size: 1.15rem;
         font-weight: 700;
         margin-bottom: 0.4rem;
         line-height: 1.35;
@@ -278,7 +278,7 @@
 
       .timeline-content p {
         font-family: var(--mono);
-        font-size: 0.78rem;
+        font-size: 0.92rem;
         color: var(--muted);
         line-height: 1.85;
         max-width: 780px;
@@ -302,7 +302,7 @@
 
       footer p {
         font-family: var(--mono);
-        font-size: 0.78rem;
+        font-size: 0.88rem;
         color: var(--muted);
       }
 
@@ -354,7 +354,7 @@
         }
 
         .hero h1 {
-          font-size: clamp(2.8rem, 11vw, 5rem);
+          font-size: clamp(2.4rem, 10vw, 4.2rem);
         }
 
         .projects-grid,
@@ -380,16 +380,22 @@
         }
 
         .nav-links a {
-          font-size: 0.7rem;
+          font-size: 0.74rem;
         }
 
         .hero p {
-          font-size: 0.88rem;
+          font-size: 0.92rem;
         }
 
         .project-card,
         .skill-item {
           padding: 1.4rem;
+        }
+
+        .project-card p,
+        .timeline-content p,
+        .skill-item .skill-sub {
+          font-size: 0.82rem;
         }
       }
     </style>
@@ -517,13 +523,10 @@
             <div class="timeline-date">30 Apr 26</div>
             <div class="timeline-content">
               <h4>Networking Deep Dive + ARP Spoofing</h4>
-              <p>TCP/UDP, DNS, OSI Layers 1-3. Ran ARP spoofing experiment on home network with Linux Mint VM.</p>
             </div>
           </div>
           <div class="timeline-item">
             <div class="timeline-date">29 Apr 26</div>
-            <div class="timeline-content">
-              <h4>LAN Experiments</h4>
               <p>Built file server, webcam stream, and phone popup alert over LAN.</p>
             </div>
           </div>
