@@ -19,81 +19,302 @@
         --mono: 'Space Mono', monospace;
         --sans: 'Syne', sans-serif;
       }
+
       * { margin: 0; padding: 0; box-sizing: border-box; }
-      body { background: var(--bg); color: var(--text); font-family: var(--sans); min-height: 100vh; overflow-x:
-  hidden; }
+
+      html { scroll-behavior: smooth; }
+
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: var(--sans);
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
       body::before {
         content: '';
         position: fixed;
         inset: 0;
-        background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border)
-  1px, transparent 1px);
+        background-image:
+          linear-gradient(var(--border) 1px, transparent 1px),
+          linear-gradient(90deg, var(--border) 1px, transparent 1px);
         background-size: 40px 40px;
         opacity: 0.4;
         pointer-events: none;
         z-index: 0;
       }
-      .container { max-width: 960px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 1; }
-      nav { padding: 1.5rem 0; border-bottom: 1px solid var(--border); position: relative; z-index: 1; }
-      nav .inner { max-width: 960px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between;
-  align-items: center; }
-      .logo { font-family: var(--mono); font-size: 0.85rem; color: var(--accent); letter-spacing: 0.05em; }
-      .nav-links { display: flex; gap: 2rem; list-style: none; }
-      .nav-links a { font-family: var(--mono); font-size: 0.75rem; color: var(--muted); text-decoration: none;
-  letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; }
-      .nav-links a:hover { color: var(--accent); }
-      .hero { padding: 6rem 0 4rem; opacity: 0; animation: fadein 0.8s ease forwards 0.2s; }
-      .hero-tag { font-family: var(--mono); font-size: 0.75rem; color: var(--accent); letter-spacing: 0.15em; text-
-  transform: uppercase; margin-bottom: 1.5rem; }
-      .hero h1 { font-size: clamp(2.5rem, 7vw, 5rem); font-weight: 800; line-height: 1.05; letter-spacing: -0.02em;
-  margin-bottom: 1.5rem; }
+
+      .container {
+        max-width: 1240px;
+        margin: 0 auto;
+        padding: 0 3rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      nav {
+        padding: 1.75rem 0;
+        border-bottom: 1px solid var(--border);
+        position: relative;
+        z-index: 1;
+      }
+
+      nav .inner {
+        max-width: 1240px;
+        margin: 0 auto;
+        padding: 0 3rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-family: var(--mono);
+        font-size: 0.95rem;
+        color: var(--accent);
+        letter-spacing: 0.05em;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2.5rem;
+        list-style: none;
+      }
+
+      .nav-links a {
+        font-family: var(--mono);
+        font-size: 0.82rem;
+        color: var(--muted);
+        text-decoration: none;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        transition: color 0.2s;
+      }
+
+      .nav-links a:hover {
+        color: var(--accent);
+      }
+
+      .hero {
+        padding: 7rem 0 5rem;
+        opacity: 0;
+        animation: fadein 0.8s ease forwards 0.2s;
+      }
+
+      .hero-tag {
+        font-family: var(--mono);
+        font-size: 0.9rem;
+        color: var(--accent);
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        margin-bottom: 1.75rem;
+      }
+
+      .hero h1 {
+        font-size: clamp(3.4rem, 7vw, 6.8rem);
+        font-weight: 800;
+        line-height: 0.98;
+        letter-spacing: -0.04em;
+        margin-bottom: 1.75rem;
+        max-width: 900px;
+      }
+
       .hero h1 .flicker {
         color: transparent;
         -webkit-text-stroke: 1px var(--muted);
         animation: broken-flicker 2.6s infinite;
       }
-      .hero p { font-family: var(--mono); font-size: 0.85rem; color: var(--muted); line-height: 1.8; max-width:
-  520px; }
-      .status-bar { display: flex; align-items: center; gap: 0.75rem; margin-top: 2rem; font-family: var(--mono);
-  font-size: 0.75rem; color: var(--muted); }
-      .status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); animation: pulse 2s
-  infinite; }
-      @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-      section { padding: 4rem 0; border-top: 1px solid var(--border); opacity: 0; animation: fadein 0.8s ease
-  forwards; }
+
+      .hero p {
+        font-family: var(--mono);
+        font-size: 1rem;
+        color: var(--muted);
+        line-height: 1.9;
+        max-width: 760px;
+      }
+
+      .status-bar {
+        display: flex;
+        align-items: center;
+        gap: 0.85rem;
+        margin-top: 2.25rem;
+        font-family: var(--mono);
+        font-size: 0.84rem;
+        color: var(--muted);
+      }
+
+      .status-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--accent);
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.3; }
+      }
+
+      section {
+        padding: 5rem 0;
+        border-top: 1px solid var(--border);
+        opacity: 0;
+        animation: fadein 0.8s ease forwards;
+      }
+
       section:nth-child(2) { animation-delay: 0.4s; }
       section:nth-child(3) { animation-delay: 0.6s; }
       section:nth-child(4) { animation-delay: 0.8s; }
-      .section-label { font-family: var(--mono); font-size: 0.7rem; color: var(--accent); letter-spacing: 0.2em;
-  text-transform: uppercase; margin-bottom: 2.5rem; }
-      .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1px;
-  background: var(--border); border: 1px solid var(--border); }
-      .project-card { background: var(--surface); padding: 1.75rem; transition: background 0.2s; }
-      .project-card:hover { background: #111820; }
-      .project-card .tag { font-family: var(--mono); font-size: 0.65rem; color: var(--accent2); letter-spacing:
-  0.15em; text-transform: uppercase; margin-bottom: 0.75rem; }
-      .project-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.6rem; line-height: 1.3; }
-      .project-card p { font-family: var(--mono); font-size: 0.72rem; color: var(--muted); line-height: 1.7; }
-      .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
-      .skill-item { border: 1px solid var(--border); padding: 1rem 1.25rem; background: var(--surface); }
-      .skill-item .skill-name { font-family: var(--mono); font-size: 0.8rem; color: var(--text); margin-bottom:
-  0.4rem; }
-      .skill-item .skill-sub { font-family: var(--mono); font-size: 0.65rem; color: var(--muted); }
-      .timeline { display: flex; flex-direction: column; }
-      .timeline-item { display: grid; grid-template-columns: 120px 1fr; gap: 2rem; padding: 1.25rem 0; border-
-  bottom: 1px solid var(--border); }
-      .timeline-item:last-child { border-bottom: none; }
-      .timeline-date { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); padding-top: 0.1rem; }
-      .timeline-content h4 { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.3rem; }
-      .timeline-content p { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); line-height: 1.7; }
-      footer { border-top: 1px solid var(--border); padding: 2rem 0; position: relative; z-index: 1; }
-      footer .inner { max-width: 960px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-
-  between; align-items: center; }
-      footer p { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); }
+
+      .section-label {
+        font-family: var(--mono);
+        font-size: 0.82rem;
+        color: var(--accent);
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        margin-bottom: 2.75rem;
+      }
+
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 1px;
+        background: var(--border);
+        border: 1px solid var(--border);
+      }
+
+      .project-card {
+        background: var(--surface);
+        padding: 2rem;
+        transition: background 0.2s;
+        min-height: 220px;
+      }
+
+      .project-card:hover {
+        background: #111820;
+      }
+
+      .project-card .tag {
+        font-family: var(--mono);
+        font-size: 0.72rem;
+        color: var(--accent2);
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        margin-bottom: 0.9rem;
+      }
+
+      .project-card h3 {
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin-bottom: 0.75rem;
+        line-height: 1.3;
+      }
+
+      .project-card p {
+        font-family: var(--mono);
+        font-size: 0.82rem;
+        color: var(--muted);
+        line-height: 1.85;
+      }
+
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 1rem;
+      }
+
+      .skill-item {
+        border: 1px solid var(--border);
+        padding: 1.25rem 1.4rem;
+        background: var(--surface);
+      }
+
+      .skill-item .skill-name {
+        font-family: var(--mono);
+        font-size: 0.9rem;
+        color: var(--text);
+        margin-bottom: 0.45rem;
+      }
+
+      .skill-item .skill-sub {
+        font-family: var(--mono);
+        font-size: 0.72rem;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .timeline {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .timeline-item {
+        display: grid;
+        grid-template-columns: 150px 1fr;
+        gap: 2.25rem;
+        padding: 1.5rem 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .timeline-item:last-child {
+        border-bottom: none;
+      }
+
+      .timeline-date {
+        font-family: var(--mono);
+        font-size: 0.8rem;
+        color: var(--muted);
+        padding-top: 0.15rem;
+      }
+
+      .timeline-content h4 {
+        font-size: 1.02rem;
+        font-weight: 700;
+        margin-bottom: 0.4rem;
+        line-height: 1.35;
+      }
+
+      .timeline-content p {
+        font-family: var(--mono);
+        font-size: 0.78rem;
+        color: var(--muted);
+        line-height: 1.85;
+        max-width: 780px;
+      }
+
+      footer {
+        border-top: 1px solid var(--border);
+        padding: 2.25rem 0;
+        position: relative;
+        z-index: 1;
+      }
+
+      footer .inner {
+        max-width: 1240px;
+        margin: 0 auto;
+        padding: 0 3rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      footer p {
+        font-family: var(--mono);
+        font-size: 0.78rem;
+        color: var(--muted);
+      }
 
       @keyframes fadein {
-        from { opacity: 0; transform: translateY(16px); }
-        to { opacity: 1; transform: translateY(0); }
+        from {
+          opacity: 0;
+          transform: translateY(16px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
 
       @keyframes broken-flicker {
@@ -120,6 +341,57 @@
             0 0 8px rgba(0, 255, 136, 0.35);
         }
       }
+
+      @media (max-width: 900px) {
+        .container,
+        nav .inner,
+        footer .inner {
+          padding: 0 1.5rem;
+        }
+
+        .hero {
+          padding: 5rem 0 4rem;
+        }
+
+        .hero h1 {
+          font-size: clamp(2.8rem, 11vw, 5rem);
+        }
+
+        .projects-grid,
+        .skills-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .timeline-item {
+          grid-template-columns: 1fr;
+          gap: 0.75rem;
+        }
+
+        footer .inner {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0.5rem;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .nav-links {
+          gap: 1.2rem;
+        }
+
+        .nav-links a {
+          font-size: 0.7rem;
+        }
+
+        .hero p {
+          font-size: 0.88rem;
+        }
+
+        .project-card,
+        .skill-item {
+          padding: 1.4rem;
+        }
+      }
     </style>
   </head>
   <body>
@@ -133,6 +405,7 @@
         </ul>
       </div>
     </nav>
+
     <div class="container">
       <div class="hero">
         <div class="hero-tag">// cs journey — self-taught</div>
@@ -144,6 +417,7 @@
           <span>Active — Bangkok, Thailand</span>
         </div>
       </div>
+
       <section id="projects">
         <div class="section-label">// projects</div>
         <div class="projects-grid">
@@ -183,6 +457,7 @@
           </div>
         </div>
       </section>
+
       <section id="skills">
         <div class="section-label">// skills</div>
         <div class="skills-grid">
@@ -204,34 +479,65 @@
   config</div></div>
         </div>
       </section>
+
       <section id="log">
         <div class="section-label">// progress log</div>
         <div class="timeline">
           <div class="timeline-item">
             <div class="timeline-date">06 May 26</div>
-            <div class="timeline-content"><h4>DVWA Command Injection + XSS + Real-site Recon</h4><p>Beat all 3
-  command injection levels. XSS Reflected Low + Medium. Found unauthenticated API on BCC registration system.</p></
-  div>
+            <div class="timeline-content">
+              <h4>DVWA Command Injection + XSS + Real-site Recon</h4>
+              <p>Beat all 3 command injection levels. XSS Reflected Low + Medium. Found unauthenticated API on BCC
+  registration system.</p>
+            </div>
           </div>
           <div class="timeline-item">
             <div class="timeline-date">05 May 26</div>
-            <div class="timeline-content"><h4>Nmap Recon + Hikvision CVE Audit</h4><p>Full network map of home
-  subnet. Identified 9 Hikvision devices. Ran CVE-2021-36260 check — all patched.</p></div>
+            <div class="timeline-content">
+              <h4>Nmap Recon + Hikvision CVE Audit</h4>
+              <p>Full network map of home subnet. Identified 9 Hikvision devices. Ran CVE-2021-36260 check — all
+  patched.</p>
+            </div>
           </div>
           <div class="timeline-item">
             <div class="timeline-date">04 May 26</div>
-            <div class="timeline-content"><h4>Headless Mini PC SSH Setup</h4><p>Configured mini PC as dedicated lab
-  machine. Full SSH + VNC remote access.</p></div>
+            <div class="timeline-content">
+              <h4>Headless Mini PC SSH Setup</h4>
+              <p>Configured mini PC as dedicated lab machine. Full SSH + VNC remote access.</p>
+            </div>
           </div>
           <div class="timeline-item">
             <div class="timeline-date">01 May 26</div>
-            . First SQL injection lab on DVWA using XAMPP.</pUDP, DNS, OSI Layers 1-3. Ran          <div class</div>
-            <div class="timeline-content"><h4>Started CS Journey</h4><p>Connected Claude to Obsidian vault via
-  filesystem connector. Set up the lab environment.</p></div>
+            <div class="timeline-content">
+              <h4>OSI Model Mastery + SQL Injection Lab</h4>
+              <p>Completed OSI Layers 4-7. First SQL injection lab on DVWA using XAMPP.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">30 Apr 26</div>
+            <div class="timeline-content">
+              <h4>Networking Deep Dive + ARP Spoofing</h4>
+              <p>TCP/UDP, DNS, OSI Layers 1-3. Ran ARP spoofing experiment on home network with Linux Mint VM.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">29 Apr 26</div>
+            <div class="timeline-content">
+              <h4>LAN Experiments</h4>
+              <p>Built file server, webcam stream, and phone popup alert over LAN.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">27 Apr 26</div>
+            <div class="timeline-content">
+              <h4>Started CS Journey</h4>
+              <p>Connected Claude to Obsidian vault via filesystem connector. Set up the lab environment.</p>
+            </div>
           </div>
         </div>
       </section>
     </div>
+
     <footer>
       <div class="inner">
         <p>// teerabodin — cs journey 2026</p>
