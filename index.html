@@ -1,250 +1,185 @@
 <!DOCTYPE html>
-  <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teerabodin — CS Journey</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?
-  family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
-    <style>
-      :root {
-        --bg: #080b0f;
-        --surface: #0e1318;
-        --border: #1c2530;
-        --accent: #00ff88;
-        --accent2: #0066ff;
-        --text: #e0e8f0;
-        --muted: #4a6070;
-        --mono: 'Space Mono', monospace;
-        --sans: 'Syne', sans-serif;
-      }
-      * { margin: 0; padding: 0; box-sizing: border-box; }
-      body { background: var(--bg); color: var(--text); font-family: var(--sans); min-height: 100vh; overflow-x:
-  hidden; }
-      body::before {
-        content: '';
-        position: fixed;
-        inset: 0;
-        background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border)
-  1px, transparent 1px);
-        background-size: 40px 40px;
-        opacity: 0.4;
-        pointer-events: none;
-        z-index: 0;
-      }
-      .container { max-width: 1240px; margin: 0 auto; padding: 0 3rem; position: relative; z-index: 1; }
-      nav { padding: 1.5rem 0; border-bottom: 1px solid var(--border); position: relative; z-index: 1; }
-      nav .inner { max-width: 1240px; margin: 0 auto; padding: 0 3rem; display: flex; justify-content: space-
-  between; align-items: center; }
-      .logo { font-family: var(--mono); font-size: 1rem; color: var(--accent); letter-spacing: 0.05em; }
-      .nav-links { display: flex; gap: 2rem; list-style: none; }
-      .nav-links a { font-family: var(--mono); font-size: 0.9rem; color: var(--muted); text-decoration: none;
-  letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; }
-      .nav-links a:hover { color: var(--accent); }
-      .hero { padding: 6rem 0 4rem; opacity: 0; animation: fadein 0.8s ease forwards 0.2s; }
-      .hero-tag { font-family: var(--mono); font-size: 0.9rem; color: var(--accent); letter-spacing: 0.15em; text-
-  transform: uppercase; margin-bottom: 1.5rem; }
-      .hero h1 { font-size: clamp(2.5rem, 7vw, 5rem); font-weight: 800; line-height: 1.05; letter-spacing: -0.02em;
-  margin-bottom: 1.5rem; }
-      .hero h1 span {
-        color: transparent;
-        -webkit-text-stroke: 1px var(--muted);
-        animation: broken-flicker 2.6s infinite;
-      }
-      .hero p { font-family: var(--mono); font-size: 1rem; color: var(--muted); line-height: 1.8; max-width:
-  680px; }
-      .status-bar { display: flex; align-items: center; gap: 0.75rem; margin-top: 2rem; font-family: var(--mono);
-  font-size: 0.9rem; color: var(--muted); }
-      .status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); animation: pulse 2s
-  infinite; }
-      @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-      section { padding: 4rem 0; border-top: 1px solid var(--border); opacity: 0; animation: fadein 0.8s ease
-  forwards; }
-      section:nth-child(2) { animation-delay: 0.4s; }
-      section:nth-child(3) { animation-delay: 0.6s; }
-      section:nth-child(4) { animation-delay: 0.8s; }
-      .section-label { font-family: var(--mono); font-size: 0.85rem; color: var(--accent); letter-spacing: 0.2em;
-  text-transform: uppercase; margin-bottom: 2.5rem; }
-      .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1px;
-  background: var(--border); border: 1px solid var(--border); }
-      .project-card { background: var(--surface); padding: 1.75rem; transition: background 0.2s; }
-      .project-card:hover { background: #111820; }
-      .project-card .tag { font-family: var(--mono); font-size: 0.78rem; color: var(--accent2); letter-spacing:
-  0.15em; text-transform: uppercase; margin-bottom: 0.75rem; }
-      .project-card h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.6rem; line-height: 1.3; }
-      .project-card p { font-family: var(--mono); font-size: 0.9rem; color: var(--muted); line-height: 1.7; }
-      .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; }
-      .skill-item { border: 1px solid var(--border); padding: 1rem 1.25rem; background: var(--surface); }
-      .skill-item .skill-name { font-family: var(--mono); font-size: 0.95rem; color: var(--text); margin-bottom:
-  0.4rem; }
-      .skill-item .skill-sub { font-family: var(--mono); font-size: 0.8rem; color: var(--muted); }
-      .timeline { display: flex; flex-direction: column; }
-      .timeline-item { display: grid; grid-template-columns: 140px 1fr; gap: 2rem; padding: 1.25rem 0; border-
-  bottom: 1px solid var(--border); }
-      .timeline-item:last-child { border-bottom: none; }
-      .timeline-date { font-family: var(--mono); font-size: 0.82rem; color: var(--muted); padding-top: 0.1rem; }
-      .timeline-content h4 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.3rem; }
-      .timeline-content p { font-family: var(--mono); font-size: 0.82rem; color: var(--muted); line-height: 1.7; }
-      footer { border-top: 1px solid var(--border); padding: 2rem 0; position: relative; z-index: 1; }
-      footer .inner { max-width: 1240px; margin: 0 auto; padding: 0 3rem; display: flex; justify-content: space-
-  between; align-items: center; }
-      footer p { font-family: var(--mono); font-size: 0.82rem; color: var(--muted); }
-      @keyframes fadein { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform:
-  translateY(0); } }
-      @keyframes broken-flicker {
-        0%, 18%, 22%, 25%, 53%, 57%, 100% {
-          color: var(--accent);
-          -webkit-text-stroke: 0;
-          text-shadow:
-            0 0 4px rgba(0, 255, 136, 0.9),
-            0 0 10px rgba(0, 255, 136, 0.7),
-            0 0 22px rgba(0, 255, 136, 0.45);
-        }
-        20%, 24%, 55% {
-          color: transparent;
-          -webkit-text-stroke: 1px var(--muted);
-          text-shadow: none;
-        }
-        21%, 56% {
-          color: rgba(0, 255, 136, 0.75);
-          -webkit-text-stroke: 0;
-          text-shadow:
-            0 0 3px rgba(0, 255, 136, 0.6),
-            0 0 8px rgba(0, 255, 136, 0.35);
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <nav>
-      <div class="inner">
-        <div class="logo">// teerabodin</div>
-        <ul class="nav-links">
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#skills">Skills</a></li>
-          <li><a href="#log">Log</a></li>
-        </ul>
-      </div>
-    </nav>
-    <div class="container">
-      <div class="hero">
-        <div class="hero-tag">// cs journey — self-taught</div>
-        <h1>Learning to <span>break</span><br>things properly.</h1>
-        <p>Teaching myself computer science and cybersecurity from the ground up. Networking, web security, recon,
-  and building things along the way.</p>
-        <div class="status-bar">
-          <div class="status-dot"></div>
-          <span>Active — Bangkok, Thailand</span>
-        </div>
-      </div>
-      <section id="projects">
-        <div class="section-label">// projects</div>
-        <div class="projects-grid">
-          <div class="project-card">
-            <div class="tag">Recon / Web</div>
-            <h3>BCC Registration Pentest</h3>
-            <p>Passive recon on Bangkok Christian College's registration system. Found an unauthenticated POST
-  endpoint exposing student data via JSON response.</p>
-          </div>
-          <div class="project-card">
-            <div class="tag">Network / IoT</div>
-            <h3>Hikvision Camera Audit</h3>
-            <p>Mapped 9 cameras + NVR across home network. Audited for CVE-2021-36260 using Python exploit
-  framework. All devices confirmed patched.</p>
-          </div>
-          <div class="project-card">
-            <div class="tag">Network / LAN</div>
-            <h3>LAN Experiments</h3>
-            <p>Built a file server, live webcam stream, and phone-to-laptop popup alert — all communicating over the
-  same local network using Python and Flask.</p>
-          </div>
-          <div class="project-card">
-            <div class="tag">Network / Python</div>
-            <h3>Network Scanner</h3>
-            <p>Custom Python network scanner for host discovery and service identification across local subnets.</p>
-          </div>
-          <div class="project-card">
-            <div class="tag">Idea / Defense</div>
-            <h3>Gateway Integrity Monitor</h3>
-            <p>Concept: monitor the default gateway's MAC address and alert if ARP mapping changes — detecting ARP
-  spoofing in real time.</p>
-          </div>
-          <div class="project-card">
-            <div class="tag">Web / Local</div>
-            <h3>Local Dev Server</h3>
-            <p>Configured Apache + XAMPP with virtual hosts on a local machine. This site is running on it.</p>
-          </div>
-        </div>
-      </section>
-      <section id="skills">
-        <div class="section-label">// skills</div>
-        <div class="skills-grid">
-          <div class="skill-item"><div class="skill-name">Network Recon</div><div class="skill-sub">nmap, ARP, host
-  discovery</div></div>
-          <div class="skill-item"><div class="skill-name">Web Security</div><div class="skill-sub">SQLi, XSS,
-  Command Injection</div></div>
-          <div class="skill-item"><div class="skill-name">Passive Recon</div><div class="skill-sub">DevTools,
-  endpoint discovery</div></div>
-          <div class="skill-item"><div class="skill-name">Networking</div><div class="skill-sub">TCP/IP, DNS, OSI,
-  ARP spoofing</div></div>
-          <div class="skill-item"><div class="skill-name">Python</div><div class="skill-sub">Flask, scripting,
-  automation</div></div>
-          <div class="skill-item"><div class="skill-name">Linux</div><div class="skill-sub">CLI, VM setup, SSH</
-  div></div>
-          <div class="skill-item"><div class="skill-name">CVE Research</div><div class="skill-sub">Firmware
-  auditing, PoC testing</div></div>
-          <div class="skill-item"><div class="skill-name">Web Dev</div><div class="skill-sub">HTML, CSS, Apache
-  config</div></div>
-        </div>
-      </section>
-      <section id="log">
-        <div class="section-label">// progress log</div>
-        <div class="timeline">
-          <div class="timeline-item">
-            <div class="timeline-date">06 May 26</div>
-            <div class="timeline-content"><h4>DVWA Command Injection + XSS + Real-site Recon</h4><p>Beat all 3
-  command injection levels. XSS Reflected Low + Medium. Found unauthenticated API on BCC registration system.</p></
-  div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-date">05 May 26</div>
-            <div class="timeline-content"><h4>Nmap Recon + Hikvision CVE Audit</h4><p>Full network map of home
-  subnet. Identified 9 Hikvision devices. Ran CVE-2021-36260 check — all patched.</p></div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-date">04 May 26</div>
-            <div class="timeline-content"><h4>Headless Mini PC SSH Setup</h4><p>Configured mini PC as dedicated lab
-  machine. Full SSH + VNC remote access.</p></div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-date">01 May 26</div>
-            <div class="timeline-content"><h4>OSI Model Mastery + SQL Injection Lab</h4><p>Completed OSI Layers 4-7.
-  First SQL injection lab on DVWA using XAMPP.</p></div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-date">30 Apr 26</div>
-            <div class="timeline-content"><h4>Networking Deep Dive + ARP Spoofing</h4><p>TCP/UDP, DNS, OSI Layers 1-
-  3. Ran ARP spoofing experiment on home network with Linux Mint VM.</p></div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-date">29 Apr 26</div>
-            <div class="timeline-content"><h4>LAN Experiments</h4><p>Built file server, webcam stream, and phone
-  popup alert over LAN.</p></div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-date">27 Apr 26</div>
-            <div class="timeline-content"><h4>Started CS Journey</h4><p>Connected Claude to Obsidian vault via
-  filesystem connector. Set up the lab environment.</p></div>
-          </div>
-        </div>
-      </section>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teerabodin — CS Journey</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #080b0f;
+      --surface: #0e1318;
+      --border: #1c2530;
+      --accent: #00ff88;
+      --accent2: #0066ff;
+      --text: #e0e8f0;
+      --muted: #4a6070;
+      --mono: 'Space Mono', monospace;
+      --sans: 'Syne', sans-serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: var(--bg); color: var(--text); font-family: var(--sans); min-height: 100vh; overflow-x: hidden; }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 40px 40px;
+      opacity: 0.4;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .container { max-width: 960px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 1; }
+    nav { padding: 1.5rem 0; border-bottom: 1px solid var(--border); position: relative; z-index: 1; }
+    nav .inner { max-width: 960px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-family: var(--mono); font-size: 0.85rem; color: var(--accent); letter-spacing: 0.05em; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { font-family: var(--mono); font-size: 0.75rem; color: var(--muted); text-decoration: none; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--accent); }
+    .hero { padding: 6rem 0 4rem; opacity: 0; animation: fadein 0.8s ease forwards 0.2s; }
+    .hero-tag { font-family: var(--mono); font-size: 0.75rem; color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1.5rem; }
+    .hero h1 { font-size: clamp(2.5rem, 7vw, 5rem); font-weight: 800; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+    .hero h1 span { color: transparent; -webkit-text-stroke: 1px var(--muted); }
+    .hero p { font-family: var(--mono); font-size: 0.85rem; color: var(--muted); line-height: 1.8; max-width: 520px; }
+    .status-bar { display: flex; align-items: center; gap: 0.75rem; margin-top: 2rem; font-family: var(--mono); font-size: 0.75rem; color: var(--muted); }
+    .status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+    section { padding: 4rem 0; border-top: 1px solid var(--border); opacity: 0; animation: fadein 0.8s ease forwards; }
+    section:nth-child(2) { animation-delay: 0.4s; }
+    section:nth-child(3) { animation-delay: 0.6s; }
+    section:nth-child(4) { animation-delay: 0.8s; }
+    .section-label { font-family: var(--mono); font-size: 0.7rem; color: var(--accent); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 2.5rem; }
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+    .project-card { background: var(--surface); padding: 1.75rem; transition: background 0.2s; }
+    .project-card:hover { background: #111820; }
+    .project-card .tag { font-family: var(--mono); font-size: 0.65rem; color: var(--accent2); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.75rem; }
+    .project-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.6rem; line-height: 1.3; }
+    .project-card p { font-family: var(--mono); font-size: 0.72rem; color: var(--muted); line-height: 1.7; }
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
+    .skill-item { border: 1px solid var(--border); padding: 1rem 1.25rem; background: var(--surface); }
+    .skill-item .skill-name { font-family: var(--mono); font-size: 0.8rem; color: var(--text); margin-bottom: 0.4rem; }
+    .skill-item .skill-sub { font-family: var(--mono); font-size: 0.65rem; color: var(--muted); }
+    .timeline { display: flex; flex-direction: column; }
+    .timeline-item { display: grid; grid-template-columns: 120px 1fr; gap: 2rem; padding: 1.25rem 0; border-bottom: 1px solid var(--border); }
+    .timeline-item:last-child { border-bottom: none; }
+    .timeline-date { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); padding-top: 0.1rem; }
+    .timeline-content h4 { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.3rem; }
+    .timeline-content p { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); line-height: 1.7; }
+    footer { border-top: 1px solid var(--border); padding: 2rem 0; position: relative; z-index: 1; }
+    footer .inner { max-width: 960px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; }
+    footer p { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); }
+    @keyframes fadein { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="inner">
+      <div class="logo">// teerabodin</div>
+      <ul class="nav-links">
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#log">Log</a></li>
+      </ul>
     </div>
-    <footer>
-      <div class="inner">
-        <p>// teerabodin — cs journey 2026</p>
-        <p>localhost</p>
+  </nav>
+  <div class="container">
+    <div class="hero">
+      <div class="hero-tag">// cs journey — self-taught</div>
+      <h1>Learning to <span>break</span><br>things properly.</h1>
+      <p>Teaching myself computer science and cybersecurity from the ground up. Networking, web security, recon, and building things along the way.</p>
+      <div class="status-bar">
+        <div class="status-dot"></div>
+        <span>Active — Bangkok, Thailand</span>
       </div>
-    </footer>
-  </body>
-  </html>
+    </div>
+    <section id="projects">
+      <div class="section-label">// projects</div>
+      <div class="projects-grid">
+        <div class="project-card">
+          <div class="tag">Recon / Web</div>
+          <h3>BCC Registration Pentest</h3>
+          <p>Passive recon on Bangkok Christian College's registration system. Found an unauthenticated POST endpoint exposing student data via JSON response.</p>
+        </div>
+        <div class="project-card">
+          <div class="tag">Network / IoT</div>
+          <h3>Hikvision Camera Audit</h3>
+          <p>Mapped 9 cameras + NVR across home network. Audited for CVE-2021-36260 using Python exploit framework. All devices confirmed patched.</p>
+        </div>
+        <div class="project-card">
+          <div class="tag">Network / LAN</div>
+          <h3>LAN Experiments</h3>
+          <p>Built a file server, live webcam stream, and phone-to-laptop popup alert — all communicating over the same local network using Python and Flask.</p>
+        </div>
+        <div class="project-card">
+          <div class="tag">Network / Python</div>
+          <h3>Network Scanner</h3>
+          <p>Custom Python network scanner for host discovery and service identification across local subnets.</p>
+        </div>
+        <div class="project-card">
+          <div class="tag">Idea / Defense</div>
+          <h3>Gateway Integrity Monitor</h3>
+          <p>Concept: monitor the default gateway's MAC address and alert if ARP mapping changes — detecting ARP spoofing in real time.</p>
+        </div>
+        <div class="project-card">
+          <div class="tag">Web / Local</div>
+          <h3>Local Dev Server</h3>
+          <p>Configured Apache + XAMPP with virtual hosts on a local machine. This site is running on it.</p>
+        </div>
+      </div>
+    </section>
+    <section id="skills">
+      <div class="section-label">// skills</div>
+      <div class="skills-grid">
+        <div class="skill-item"><div class="skill-name">Network Recon</div><div class="skill-sub">nmap, ARP, host discovery</div></div>
+        <div class="skill-item"><div class="skill-name">Web Security</div><div class="skill-sub">SQLi, XSS, Command Injection</div></div>
+        <div class="skill-item"><div class="skill-name">Passive Recon</div><div class="skill-sub">DevTools, endpoint discovery</div></div>
+        <div class="skill-item"><div class="skill-name">Networking</div><div class="skill-sub">TCP/IP, DNS, OSI, ARP spoofing</div></div>
+        <div class="skill-item"><div class="skill-name">Python</div><div class="skill-sub">Flask, scripting, automation</div></div>
+        <div class="skill-item"><div class="skill-name">Linux</div><div class="skill-sub">CLI, VM setup, SSH</div></div>
+        <div class="skill-item"><div class="skill-name">CVE Research</div><div class="skill-sub">Firmware auditing, PoC testing</div></div>
+        <div class="skill-item"><div class="skill-name">Web Dev</div><div class="skill-sub">HTML, CSS, Apache config</div></div>
+      </div>
+    </section>
+    <section id="log">
+      <div class="section-label">// progress log</div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-date">06 May 26</div>
+          <div class="timeline-content"><h4>DVWA Command Injection + XSS + Real-site Recon</h4><p>Beat all 3 command injection levels. XSS Reflected Low + Medium. Found unauthenticated API on BCC registration system.</p></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">05 May 26</div>
+          <div class="timeline-content"><h4>Nmap Recon + Hikvision CVE Audit</h4><p>Full network map of home subnet. Identified 9 Hikvision devices. Ran CVE-2021-36260 check — all patched.</p></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">04 May 26</div>
+          <div class="timeline-content"><h4>Headless Mini PC SSH Setup</h4><p>Configured mini PC as dedicated lab machine. Full SSH + VNC remote access.</p></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">01 May 26</div>
+          <div class="timeline-content"><h4>OSI Model Mastery + SQL Injection Lab</h4><p>Completed OSI Layers 4-7. First SQL injection lab on DVWA using XAMPP.</p></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">30 Apr 26</div>
+          <div class="timeline-content"><h4>Networking Deep Dive + ARP Spoofing</h4><p>TCP/UDP, DNS, OSI Layers 1-3. Ran ARP spoofing experiment on home network with Linux Mint VM.</p></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">29 Apr 26</div>
+          <div class="timeline-content"><h4>LAN Experiments</h4><p>Built file server, webcam stream, and phone popup alert over LAN.</p></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">27 Apr 26</div>
+          <div class="timeline-content"><h4>Started CS Journey</h4><p>Connected Claude to Obsidian vault via filesystem connector. Set up the lab environment.</p></div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <footer>
+    <div class="inner">
+      <p>// teerabodin — cs journey 2026</p>
+      <p>localhost</p>
+    </div>
+  </footer>
+</body>
+</html>
